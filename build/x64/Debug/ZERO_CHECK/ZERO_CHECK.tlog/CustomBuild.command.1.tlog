@@ -1,0 +1,10 @@
+^C:\TEST_TASK\BUILD\CMAKEFILES\F3F502B5D046DC3191B4042F96DF603C\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Test_task -BC:/Test_task/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Test_task/build/GameOfLife.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
