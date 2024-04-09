@@ -5,8 +5,8 @@
 #include <vector>
 
 //Инициализация констант экрана
-int SCREEN_HEIGHT = 1920;
-int SCREEN_WIDTH = 1080;
+int SCREEN_HEIGHT = 1080;
+int SCREEN_WIDTH = 1920;
 int CELL_SIZE = 10;
 int GRID_HEIGHT = SCREEN_HEIGHT / CELL_SIZE;
 int GRID_WIDTH = SCREEN_WIDTH / CELL_SIZE;
@@ -96,9 +96,10 @@ int main(int argc, char* argv[]) {
     if (argc == 4) {
         SCREEN_HEIGHT = std::stoi(argv[2]);
         SCREEN_WIDTH = std::stoi(argv[3]);
-        GRID_HEIGHT = std::stoi(argv[2]) / CELL_SIZE;
-        GRID_WIDTH = std::stoi(argv[3]) / CELL_SIZE;
+        GRID_HEIGHT = SCREEN_HEIGHT / CELL_SIZE;
+        GRID_WIDTH = SCREEN_WIDTH / CELL_SIZE;
     }
+
     grid = std::vector<std::vector<bool>>(GRID_HEIGHT, std::vector<bool>(GRID_WIDTH, 0));
     temp = grid;
 
@@ -109,7 +110,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Создание окна
-    SDL_Window* win = SDL_CreateWindow("Game of life", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_HEIGHT, SCREEN_WIDTH, SDL_WINDOW_SHOWN);
+    SDL_Window* win = SDL_CreateWindow("Game of life", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (win == nullptr) {
         std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         SDL_Quit();
@@ -157,9 +158,13 @@ int main(int argc, char* argv[]) {
                     SDL_GetMouseState(&x, &y);
                     x /= CELL_SIZE;
                     y /= CELL_SIZE;
-                    grid[y][x] = !grid[y][x];
 
-                    drawGrid(ren);
+                    if (x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT) {
+                        grid[y][x] = !grid[y][x];
+
+
+                        drawGrid(ren);
+                    }
                 }
             }
             }
