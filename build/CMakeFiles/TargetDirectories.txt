@@ -1,3 +1,0 @@
-C:/Test_task/build/CMakeFiles/GameOfLife.dir
-C:/Test_task/build/CMakeFiles/ALL_BUILD.dir
-C:/Test_task/build/CMakeFiles/ZERO_CHECK.dir
